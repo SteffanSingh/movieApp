@@ -9,7 +9,7 @@ class StorageJson(IStorage):
     def list_movies(self):
         """function to get the list of  all the movies """
         try:
-            with open("../project2/data.json", "r") as f:
+            with open("data.json", "r") as f:
                 data = json.load(f)
         except Exception as e:
             print(f"The error is :{e}, Please check your internet connection and try again. ")
