@@ -1,8 +1,7 @@
 from istorage import IStorage
 import json
-import requests
-
-class StorageJson(IStorage):
+import  requests
+class StorageCsv(IStorage):
     def __init__(self, file_path):
         self.file_path = file_path
 
@@ -11,7 +10,11 @@ class StorageJson(IStorage):
         try:
             with open("data.json", "r") as f:
                 data = json.load(f)
-
+            data1 = f" title, rating,  year \n"
+            for key, value in data.items():
+                data1 += f"""{key},{value["Rating"]}, {value["year"]}\n"""
+                with open("data.csv", "w") as f:
+                    f.write(data1)
 
 
         except Exception as e:
@@ -49,8 +52,8 @@ class StorageJson(IStorage):
         except Exception as e:
             print(f"The error is {data['Error']} in database")
 
-        with open("data.json", "w") as f:
-            f.write(json.dumps(movies))
+        with open("data.csv", "a") as f:
+            f.write(f"""{data["Title"]}, {data["Year"]}, {data["imdbRating"]} """)
 
 
     def delete_movie(self):
@@ -64,7 +67,13 @@ class StorageJson(IStorage):
             print("oops !! The movie does not exist in the list.")
         with open("data.json", "w") as f:
             f.write(json.dumps(movies))
-
+        data1 = f" title, rating,  year \n"
+        with open("data.json", "r") as f:
+            data = json.load(f)
+        for key, value in data.items():
+            data1 += f"""{key},{value["Rating"]}, {value["year"]}\n"""
+            with open("data.csv", "w") as f:
+                f.write(data1)
     def update_movie(self):
         """ funciton to update the movie´s raiting and notes"""
         movies = self.list_movies()
@@ -87,7 +96,13 @@ class StorageJson(IStorage):
         else:
             print(f"The movie '{movie_name}' does not exist in the list")
 
-        with open("data.json", "w") as f:
+        with open("data.csv", "w") as f:
             f.write(json.dumps(movies))
-
+        data1 = f" title, rating,  year \n"
+        with open("data.json", "r") as f:
+            data = json.load(f)
+        for key, value in data.items():
+            data1 += f"""{key},{value["Rating"]}, {value["year"]}\n"""
+            with open("data.csv", "w") as f:
+                f.write(data1)
 

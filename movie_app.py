@@ -131,22 +131,13 @@ class MovieApp:
     def run(self):
       # Print menu
         store = StorageJson(file_path="")
-        def helper_add_movie():
-            title = input("enter the movie name")
-            year= int(input( "enter the year "))
-            rating = float( input( " Enter the rating of the movie only "))
-            poster = input( " enter the poster image link")
-            store.add_movie(title,year, rating, poster)
 
-        def helper_delete_movie():
-            title = input("Enter the movie to be deleted")
-            store.delete_movie(title)
 
       # Get use command
         command_dic = {
             "1": self._command_list_movies,
-            "2": helper_add_movie,
-            "3": helper_delete_movie,
+            "2": store.add_movie,
+            "3": store.delete_movie,
             "4": store.update_movie,
             "5": self._command_movie_stats,
             "6": self._command_random_movie,
@@ -177,7 +168,7 @@ class MovieApp:
                     print("Bye!")
                     break
 
-                command_dic[choice](self)
+                command_dic[choice]()
             except Exception as e:
                 print(f"The error is :{e}. The value is not an integer between 0-9, please enter the value between 0-9")
 
