@@ -130,15 +130,15 @@ class MovieApp:
 
     def run(self):
       # Print menu
-        store = StorageJson(file_path="")
+        #store = StorageJson()
 
 
       # Get use command
         command_dic = {
             "1": self._command_list_movies,
-            "2": store.add_movie,
-            "3": store.delete_movie,
-            "4": store.update_movie,
+            "2": self._storage.add_movie,
+            "3": self._storage.delete_movie,
+            "4": self._storage.update_movie,
             "5": self._command_movie_stats,
             "6": self._command_random_movie,
             "7": self._command_search_movie,

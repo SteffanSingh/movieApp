@@ -9,7 +9,7 @@ class StorageJson(IStorage):
     def list_movies(self):
         """function to get the list of  all the movies """
         try:
-            with open("data.json", "r") as f:
+            with open(self.file_path, "r") as f:
                 data = json.load(f)
 
 
@@ -49,9 +49,8 @@ class StorageJson(IStorage):
         except Exception as e:
             print(f"The error is {data['Error']} in database")
 
-        with open("data.json", "w") as f:
-            f.write(json.dumps(movies))
-
+        with open(self.file_path, "w") as f:
+            f.write(json.dumps(movies, indent=4, separators=(",", ":")))
 
     def delete_movie(self):
         """function to delete the movie"""
@@ -62,11 +61,14 @@ class StorageJson(IStorage):
             print(f"The movie {movie_name} is successfully deleted !")
         else:
             print("oops !! The movie does not exist in the list.")
-        with open("data.json", "w") as f:
-            f.write(json.dumps(movies))
+        with open(self.file_path, "w") as f:
+
+            #f.write(json.dumps(movies,  ))
+            #json.dumps(movies, f,indent= 4, separators=(", ", ": ") )
+            f.write(json.dumps(movies, indent=4, separators=(",",":")))
 
     def update_movie(self):
-        """ funciton to update the movie´s raiting and notes"""
+        """ funciton to update the movie´s ratiing and notes"""
         movies = self.list_movies()
         movie_name = input("Enter the movie name to be updated")
 
@@ -87,7 +89,8 @@ class StorageJson(IStorage):
         else:
             print(f"The movie '{movie_name}' does not exist in the list")
 
-        with open("data.json", "w") as f:
-            f.write(json.dumps(movies))
+        with open(self.file_path, "w") as f:
+            f.write(json.dumps(movies, indent=4, separators=(",",":")))
+
 
 
